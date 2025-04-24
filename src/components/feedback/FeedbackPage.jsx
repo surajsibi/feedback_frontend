@@ -21,11 +21,14 @@ const FeedbackTextarea = () => {
       await dispatch(updateFeedback({id:editFeedback._id,updatedContent:content}));
      await setButtonValue("Submit");
       console.log("work done")
+      setcontent("");
     }
     else{
-      dispatch(addFeedback({content}))
+     console.log(content)
+      await  dispatch(addFeedback({content}))
+
+      setcontent("");
     }
-    setcontent("");
   };
   
 

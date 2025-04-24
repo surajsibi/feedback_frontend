@@ -5,17 +5,18 @@ import Button from '../utils/Button.jsx'
 import { useDispatch,useSelector } from 'react-redux'
 import { registerUser } from '../../store/authSlice.js'
 import { NavLink } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 
 const Register = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.auth.userData);
   
     const {handleSubmit,register,formState:{errors}}=useForm();
-    const submit = (data) => {
-      console.log(data);
-      
+    const submit = (data) => {     
         dispatch(registerUser(data));
+        navigate("/dashboard")
     }
     console.log(userData);
     return (

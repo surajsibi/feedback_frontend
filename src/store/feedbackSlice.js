@@ -18,8 +18,10 @@ export const getFeedbacks = createAsyncThunk("feedbacks", async () => {
 });
 export const addFeedback = createAsyncThunk("addFeedback", async (data) => {
   try {
-    const response = await axisoInstance.post("/feedback", data.updatedContent);
+    const response = await axisoInstance.post("/feedback", data);
+    console.log(response)
     return response.data.data;
+
   } catch (error) {
     throw error;
   }
@@ -55,7 +57,7 @@ const feedbackSlice = createSlice({
     builder.addCase(addFeedback.fulfilled, (state, action) => {
       state.loading = false;
       state.status = true;
-      state.feedbacks.push(action.payload);
+      // state.feedbacks.push(action.payload);
     });
     builder.addCase(updateFeedback.fulfilled, (state, action) => {
       state.loading = false;
