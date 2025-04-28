@@ -3,13 +3,12 @@ import React from 'react'
 const Button = ({
     children,
     type="button",
-    bgColor="#512da8",
-    textColor="red",
+    disableHover = false,
     className ="",
     ...props
 }) => {
   return (
-    <button className={`  font-bold cursor-pointer tracking-tight uppercase border ${className} ${type} bg-[${bgColor}] text-${textColor} rounded-md py-2 px-4`}
+    <button type={type}  className={` font-bold cursor-pointer tracking-tight uppercase border rounded-md ${disableHover ? "" : " hover:scale-110 "}transition-all duration-300 ${className}`}
     {...props}
     >
         {children}

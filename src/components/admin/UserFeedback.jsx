@@ -5,6 +5,8 @@ import { useParams } from 'react-router-dom';
 import {setEditingFeedback} from "../../store/feedbackSlice.js"
 import { useNavigate } from 'react-router-dom';
 import { deleteFeedback } from '../../store/adminSlice.js';
+import Button from '../utils/Button.jsx';
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 
 
@@ -15,7 +17,7 @@ const UserFeedback = () => {
 
     const dispatch = useDispatch();
     const {id} = useParams()
-    console.log(id,"is this id");
+    
     
     const feedbacks = useSelector((state) => state.admin.usersFeedback);
     const handleDelete = (feedbacks) =>{
@@ -25,7 +27,6 @@ const UserFeedback = () => {
     useEffect(()=>{
         dispatch(getUserFeedback(id));
     },[id,handleDelete])
-    console.log(feedbacks,"this is ");
 
     const formatDate = (isoString) => {
         const date = new Date(isoString);
@@ -52,7 +53,10 @@ const UserFeedback = () => {
 
   return (
     <div className='w-full h-[100vh] flex flex-col justify-center  items-center'>
+    <div className='flex  justify-center items-center gap-7'>
     <h1 className='text-3xl mb-4 font-bold'>Admin Feedback dashboard</h1>
+      <div onClick={() => navigate("/admin")} className='flex justify-center items-center ml-40'><Button className='py-2 px-3 bg-black text-white ' children=<IoMdArrowRoundBack size={24} />/></div>
+    </div>
     <div className="w-[50%]">
     <table className="min-w-full bg-white rounded shadow">
         <thead>

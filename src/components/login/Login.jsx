@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Input from "../utils/Input.jsx";
 import Button from "../utils/Button.jsx";
@@ -11,23 +11,31 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
-  const userData = useSelector((state) => state.auth.userData);
   const dispatch = useDispatch();
+  const userData = useSelector((state) => state.auth.userData);
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm();
+  
+  const  loginError = useSelector((state) => state.auth.error);
 
   const submit = async (data) => {
     
-     dispatch(loginUser(data));
-    if(userData.isAdmin === false){
-      navigate("/dashboard");
-    }else{
-      navigate("/admin");
-    }
+    dispatch(loginUser(data));
+     console.log(data,"this is userdat") 
   };
+  console.log(loginError,"this is login error");
+  useEffect(() => {
+    if (userData) {
+      if (!userData.isAdmin) {
+        navigate("/dashboard");
+      } else {
+        navigate("/admin");
+      }
+    }
+  }, [userData]);
   
   return (
     <div className="border rounded-lg w-[30%] flex flex-col p-4  ">

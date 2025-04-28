@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import {getFeedbacks} from '../../store/feedbackSlice.js'
 import { setEditingFeedback } from "../../store/feedbackSlice.js";
 import {useDispatch, useSelector} from 'react-redux'
+import { RxCross2 } from "react-icons/rx";
 export default function FeedbackList({setEditFeedback}) {
   const dispatch = useDispatch()
   const feedbacks = useSelector((state) => state.feedback.feedbacks);
@@ -18,7 +19,7 @@ export default function FeedbackList({setEditFeedback}) {
   
   
   return (
-    <div className="border w-full h-[50vh] overflow-y-scroll">
+    <div className="border w-full h-[65vh] overflow-y-scroll">
       <table className="table-auto border w-full ">
       <thead>
         <tr className="border">

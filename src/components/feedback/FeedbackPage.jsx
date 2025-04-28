@@ -3,6 +3,7 @@ import FeedbackForm from "./feedbackForm.jsx";
 import Button from "../utils/Button.jsx";
 import {addFeedback, setEditingFeedback, updateFeedback,} from "../../store/feedbackSlice.js"
 import { useDispatch ,useSelector} from "react-redux";
+import toast from "react-hot-toast";
 
 
 const FeedbackTextarea = () => {
@@ -17,10 +18,12 @@ const FeedbackTextarea = () => {
 
   const handleSubmit =async (e) => {
     e.preventDefault();
-    if(editFeedback){
+    if(!content){
+      toast.error("Please write your feedback");
+    }
+    else if(editFeedback){
       await dispatch(updateFeedback({id:editFeedback._id,updatedContent:content}));
      await setButtonValue("Submit");
-      console.log("work done")
       setcontent("");
     }
     else{
@@ -30,6 +33,7 @@ const FeedbackTextarea = () => {
       setcontent("");
     }
   };
+
   
 
   useEffect(() => {
@@ -43,7 +47,7 @@ const FeedbackTextarea = () => {
   }, [editFeedback]);
 
   return (
-   <div className='flex flex-col gap-2'>
+   <div className='flex flex-col gap-2 '>
      <form >
       <FeedbackForm
         placeholder="Write your feedback"
@@ -51,8 +55,10 @@ const FeedbackTextarea = () => {
         setcontent={setcontent}
       />
     </form>
-
-    <Button onClick={handleSubmit} children={buttonValue}/>
+    <div className="flex justify-center">
+    <Button onClick={handleSubmit}  className="py-2 px-4 mt-5 bg-green-400 text-white w-[30%] self-center text-xl" children={buttonValue}/>
+   
+    </div>
    </div>
   );
 };

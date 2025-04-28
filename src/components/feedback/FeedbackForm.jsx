@@ -13,9 +13,9 @@ const FeedbackForm = React.forwardRef(
           </label>
         )}
         <textarea
-          rows="9"
+          rows="10"
           value={content}
-          className="w-full border rounded p-2 resize-none"
+          className="w-full border rounded p-2 resize-none bg-white text-xl"
           placeholder={placeholder}
           ref={ref}
           id={id}
